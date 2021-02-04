@@ -14,6 +14,7 @@ import { Container, TextInput, Icon } from './styles';
 interface InputProps extends TextInputProps {
   name: string;
   icon: string;
+  containerStyle?: {};
 }
 
 interface InputValueReference {
@@ -25,7 +26,7 @@ interface InputRef {
 }
 
 const Button: React.ForwardRefRenderFunction<InputRef, InputProps> = (
-  { name, icon, ...props },
+  { name, icon, containerStyle = {}, ...props },
   ref,
 ) => {
   const inputElementRef = useRef<any>(null);
@@ -64,7 +65,7 @@ const Button: React.ForwardRefRenderFunction<InputRef, InputProps> = (
     });
   }, [fieldName, registerField]);
   return (
-    <Container isFocused={isFocused} isErrored={!!error}>
+    <Container isFocused={isFocused} style={containerStyle} isErrored={!!error}>
       <Icon
         name={icon}
         size={20}
